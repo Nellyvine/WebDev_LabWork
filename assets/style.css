@@ -1,0 +1,182 @@
+/* Club Members Manager — stylesheet. Nothing to change in here. */
+
+:root {
+    --ink:       #16232b;
+    --slate:     #5a6b74;
+    --paper:     #f2efe9;
+    --card:      #ffffff;
+    --line:      #d9d3c8;
+    --teal:      #0f6b63;
+    --teal-dark: #0a4f49;
+    --amber:     #c8761a;
+    --red:       #a32c22;
+    --green:     #2f6b3a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 0 1rem 3rem;
+    background: var(--paper);
+    color: var(--ink);
+    font: 16px/1.55 "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+.wrap { max-width: 900px; margin: 0 auto; }
+
+/* ---------- header ---------- */
+header.bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--ink);
+    padding: 1.5rem 0 .75rem;
+    margin-bottom: 1.5rem;
+}
+header.bar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    letter-spacing: -.02em;
+}
+header.bar h1 span { color: var(--teal); }
+.who { font-size: .85rem; color: var(--slate); }
+.who a { color: var(--red); }
+
+/* ---------- flash ---------- */
+.flash {
+    border-left: 4px solid var(--green);
+    background: #e6f0e7;
+    color: var(--green);
+    padding: .7rem .9rem;
+    margin-bottom: 1.25rem;
+    font-size: .92rem;
+}
+.flash.warn { border-color: var(--red); background: #f6e5e3; color: var(--red); }
+
+/* ---------- table ---------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--line);
+    font-size: .93rem;
+}
+caption {
+    text-align: left;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--slate);
+    padding-bottom: .5rem;
+}
+th, td {
+    text-align: left;
+    padding: .6rem .75rem;
+    border-bottom: 1px solid var(--line);
+}
+thead th {
+    background: var(--ink);
+    color: #fff;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: #faf8f4; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.actions { white-space: nowrap; }
+.empty { padding: 2rem; text-align: center; color: var(--slate); }
+
+/* ---------- form ---------- */
+form.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 1.5rem;
+    max-width: 520px;
+}
+.field { margin-bottom: 1.1rem; }
+.field label {
+    display: block;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    margin-bottom: .3rem;
+}
+.field input,
+.field select {
+    width: 100%;
+    padding: .55rem .65rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: #fff;
+    font: inherit;
+    color: inherit;
+}
+.field input:focus,
+.field select:focus {
+    outline: 2px solid var(--teal);
+    outline-offset: 1px;
+    border-color: var(--teal);
+}
+.field input.invalid,
+.field select.invalid { border-color: var(--red); background: #fdf5f4; }
+
+.error {
+    display: block;
+    min-height: 1.1rem;
+    margin-top: .25rem;
+    font-size: .8rem;
+    color: var(--red);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+    display: inline-block;
+    padding: .55rem 1.1rem;
+    border: 0;
+    border-radius: 2px;
+    background: var(--teal);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn:hover { background: var(--teal-dark); }
+.btn.ghost {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+}
+.btn.ghost:hover { background: #e6efee; }
+.btn.small { padding: .3rem .6rem; font-size: .8rem; }
+.btn.danger { background: var(--red); }
+.btn.danger:hover { background: #7d211a; }
+.btn.link {
+    background: none;
+    color: var(--red);
+    padding: .3rem .4rem;
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+
+/* ---------- login ---------- */
+.login-shell {
+    max-width: 360px;
+    margin: 12vh auto 0;
+}
+.login-shell h1 {
+    font-size: 1.35rem;
+    margin: 0 0 .25rem;
+}
+.login-shell p.sub { margin: 0 0 1.5rem; color: var(--slate); font-size: .88rem; }
+.hint {
+    margin-top: 1rem;
+    font-size: .78rem;
+    color: var(--slate);
+}

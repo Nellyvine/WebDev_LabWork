@@ -1,0 +1,21 @@
+Name:
+Class:
+Date:
+
+TASK 1 - The 10 HTML errors I found in form.php
+(one per line: line number - what was wrong - how I fixed it)
+
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+
+
+Anything that did not work, and what you tried:
+

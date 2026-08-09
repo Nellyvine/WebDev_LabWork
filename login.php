@@ -1,0 +1,55 @@
+<?php
+require 'config.php';
+require 'auth.php';
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    // TODO 3a-3: check $username exists in $USERS and that $password matches
+    //            $USERS[$username]['hash'] using password_verify().
+    //
+    //   On success:  regenerate the session id, save 'user' and 'name' in
+    //                $_SESSION, redirect to index.php, exit.
+    //   On failure:  $error = 'Wrong username or password.';
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign in — Club Members Manager</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="login-shell">
+
+    <h1>Club Members Manager</h1>
+    <p class="sub">Sign in to manage the member list.</p>
+
+    <?php if ($error !== ''): ?>
+        <p class="flash warn"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
+    <form class="card" method="post" action="login.php">
+        <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" autofocus>
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <button type="submit" class="btn">Sign in</button>
+    </form>
+
+    <p class="hint">Classroom account: admin / admin123</p>
+
+</div>
+</body>
+</html>
