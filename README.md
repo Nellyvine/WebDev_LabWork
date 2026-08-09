@@ -119,11 +119,6 @@ escaping used throughout 3.
 
 ---
 
-## Submitting (5 min)
-
-Zip your `members` folder as `surname_firstname_classwork.zip` and upload it to
-the class folder. Include `ANSWERS.txt`.
-
 ## Marking summary
 
 | Task | Marks |
@@ -134,10 +129,3 @@ the class folder. Include `ANSWERS.txt`.
 | 3b — CRUD | 30 |
 | Code readability, indentation, no leftover TODOs | 10 |
 | **Total** | **100** |
-
-## If you finish early
-
-- Add a search box that filters members by name (`LIKE ?`, still prepared —
-  bind `'%' . $term . '%'` as a value, never glue it into the SQL).
-- Add a "last login" time to the session and show it in the header.
-- Stop the same email being registered twice.
