@@ -19,18 +19,31 @@ $member = [
     'date_joined' => '',
 ];
 
+/* 3b-1 — load the row when editing */
 if (isset($_GET['id']) && $_GET['id'] !== '') {
-    // TODO 3b-1: fetch the member with this id using a PREPARED statement
-    //            and put the row into $member.
-    //            prepare() -> bind_param('i', $id) -> execute()
-    //                      -> get_result()->fetch_assoc()
-    //            If no row is found, redirect back to index.php.
+    $id   = (int)$_GET['id'];
+    $stmt = $conn->prepare('SELECT * FROM members WHERE id = ?');
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+
+    if (!$row) {
+        set_flash('That member was not found.', 'warn');
+        header('Location: index.php');
+        exit;
+    }
+    $member = $row;
 }
 
 $heading = $member['id'] === '' ? 'Add a member' : 'Edit member';
+$roles   = ['President', 'Secretary', 'Treasurer', 'Member'];
 ?>
-<html>
+<!DOCTYPE html>                                   <!-- FIX 1 -->
+<html lang="en">
 <head>
+    <meta charset="UTF-8">                        <!-- FIX 2 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Club Members Manager</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -60,29 +73,31 @@ $heading = $member['id'] === '' ? 'Add a member' : 'Edit member';
 
         <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="mail" name="email"
+            <!-- FIX 6: id now matches the label's for -->
+            <input type="email" id="email" name="email"
                    value="<?= htmlspecialchars($member['email']) ?>">
             <span class="error" id="err_email"></span>
         </div>
 
         <div class="field">
             <label for="phone">Phone</label>
-            <input type="text" id="phone"
+            <!-- FIX 7: name added, or PHP never receives the phone -->
+            <input type="text" id="phone" name="phone"
                    value="<?= htmlspecialchars($member['phone']) ?>">
             <span class="error" id="err_phone"></span>
+        </div>                                     <!-- FIX 4: closing div -->
 
         <div class="field">
             <label for="role">Role</label>
             <select id="role" name="role">
-                <!-- Hint: when editing, the member's current role must already
-                     be selected. Add a `selected` attribute to the right one. -->
                 <option value="">-- choose a role --</option>
                 <option value="President">President</option>
                 <option value="Secretary">Secretary</option>
                 <option value="Treasurer">Treasurer</option>
                 <option value="Member">Member</option>
             </select>
-            <span class="error" id="role"></span>
+            <!-- FIX 8: id was a duplicate of the select's id -->
+            <span class="error" id="err_role"></span>
         </div>
 
         <div class="field">
@@ -99,12 +114,14 @@ $heading = $member['id'] === '' ? 'Add a member' : 'Edit member';
             <span class="error" id="err_date_joined"></span>
         </div>
 
-        <button type="button" class="btn">Save member</button>
+        <!-- FIX 9: type="button" never submits -->
+        <button type="submit" class="btn">Save member</button>
         <a href="index.php" class="btn ghost">Cancel</a>
     </form>
 
 </div>
 
-<script src="assets/validation.js" />
+<!-- FIX 10: a script tag cannot be self-closed -->
+<script src="assets/validation.js"></script>
 </body>
 </html>
