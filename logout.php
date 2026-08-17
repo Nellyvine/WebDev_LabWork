@@ -1,8 +1,4 @@
-// TODO 3a-5: empty $_SESSION, destroy the session, then redirect to login.php.
-// Done
-
-<!-- 
- TASK 3a-5: log out = clear all session data, then destroy the
+<!--  TASK 3a-5: log out = clear all session data, then destroy the
  session on the server, then send the user back to the login page. -->
 
 

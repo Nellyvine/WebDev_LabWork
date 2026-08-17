@@ -4,9 +4,6 @@
  * Every page except login.php includes this file and calls require_login().
  */
 
-// TODO 3a-1: start the session (only if one is not already started).
-
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -14,10 +11,9 @@ if (session_status() === PHP_SESSION_NONE) {
 /**
  * Stop the page and send the visitor to login.php when nobody is signed in.
  */
+
 function require_login()
 {
-    // TODO 3a-2: if $_SESSION['user'] is not set, redirect to login.php
-    //            and stop the script with exit;
 
     if (!isset($_SESSION['user'])){
         header('location: login.php');
@@ -29,6 +25,7 @@ function require_login()
  * Store a one-time message that the next page will show, then forget it.
  * (Already written — use it after every add / update / delete.)
  */
+
 function set_flash($message, $type = 'ok')
 {
     $_SESSION['flash'] = ['msg' => $message, 'type' => $type];

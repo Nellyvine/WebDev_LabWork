@@ -29,9 +29,6 @@ $role        = trim($_POST['role'] ?? '');
 $fee_paid    = trim($_POST['fee_paid'] ?? '');
 $date_joined = trim($_POST['date_joined'] ?? '');
 
-// TODO 3b-2: if any of the six values above is empty, set a warning flash
-//            and send the user back to form.php.
-// Done
 /*
  * TASK 3b-2: server-side validation. This is the real security
  * boundary — client-side JS can be disabled, so nothing here can
@@ -45,12 +42,7 @@ if ($full_name === '' || $email === '' || $phone === '' || $role === '' || $fee_
 }
 
 if ($id === '') {
-    // TODO 3b-3: INSERT a new member.
-    //            $stmt = $conn->prepare('INSERT INTO members (...) VALUES (?, ?, ...)');
-    //            $stmt->bind_param('...', ...);
-    //            $stmt->execute();
-    //            Then set_flash('Member added.') and redirect to index.php.
-    // Done
+    
     // TASK 3b-3: id is empty -> this is a brand new member -> INSERT
 
     $stmt = $conn->prepare(
@@ -63,11 +55,7 @@ if ($id === '') {
     header('Location: index.php');
     exit;
 } else {
-    // TODO 3b-4: UPDATE the member whose id matches. Remember the id is the
-    //            LAST ? in the query, so it is the last letter in the type
-    //            string and the last value in bind_param.
-    //            Then set_flash('Member updated.') and redirect.
-    // Done
+
     // TASK 3b-4: id has a value -> this is an existing member -> UPDATE
 
 

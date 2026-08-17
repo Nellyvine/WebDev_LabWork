@@ -8,14 +8,7 @@ require_login();
  * index.php sends a POST form here containing the member id.
  */
 
-// TODO 3b-5: refuse anything that is not a POST request
-//            (redirect back to index.php).
-
-// TASK 3b-5: only a deliberate POST can delete — never a GET request
-
-// TODO 3b-6: delete the row with this id using prepare() + bind_param('i', $id)
-//            + execute(). Check $stmt->affected_rows to decide which flash
-//            message to show, then redirect to index.php.
+// TASK 3b-5: only a deliberate POST can delete — never a GET requests
 
 // TASK 3b-6: affected_rows tells us whether a row actually existed
 //            to delete, so the flash message reflects what really happened

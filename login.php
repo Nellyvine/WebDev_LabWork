@@ -4,20 +4,12 @@ require 'auth.php';
 
 $error = '';
 
-    // TODO 3a-3: check $username exists in $USERS and that $password matches
-    //            $USERS[$username]['hash'] using password_verify().
-    //
-    //   On success:  regenerate the session id, save 'user' and 'name' in
-    //                $_SESSION, redirect to index.php, exit.
-    //   On failure:  $error = 'Wrong username or password.';
-
     /*
     * TASK 3a-3: password_verify() compares the submitted password
     * against the stored HASH — we never store or compare plaintext.
     * session_regenerate_id(true) issues a fresh session ID on login
     * to prevent session fixation attacks.
     */
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');

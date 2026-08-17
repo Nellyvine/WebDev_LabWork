@@ -3,10 +3,6 @@ require 'config.php';
 require 'auth.php';
 require_login();
 
-// TODO 3b-0: fetch every member from the database, newest first, into
-//            $members. There is no user input in this query, so $conn->query()
-//            is enough here — then loop with while ($row = $result->fetch_assoc()).
-// Done 
 // TASK 3b-0: no user input here, so a plain query() is safe and sufficient
 
 $members = [];
@@ -87,9 +83,6 @@ $flash = take_flash();
                         <button type="submit" class="btn small danger">Delete</button>
                     </form>
 
-                    <!-- TODO 3b-7: a small POST form that sends this member's
-                         id to delete.php, with an onsubmit confirmation. -->
-                    <!-- Done -->
                     <!-- TASK 3b-7: delete must be POST (not a GET link) so it can't be
                         triggered accidentally by prefetching or crawling; confirm() adds a manual safety check --> 
 
