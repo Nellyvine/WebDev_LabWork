@@ -39,6 +39,7 @@ if (isset($_GET['id']) && $_GET['id'] !== '') {
 $heading = $member['id'] === '' ? 'Add a member' : 'Edit member';
 $roles   = ['President', 'Secretary', 'Treasurer', 'Member'];
 ?>
+
 <!DOCTYPE html>                                   <!-- FIX 1 -->
 <html lang="en">
 <head>
@@ -58,9 +59,11 @@ $roles   = ['President', 'Secretary', 'Treasurer', 'Member'];
         </p>
     </header>
 
-    <h2><?= $heading ?></h3>
+    <h2><?= $heading ?></h2>   <!--  Fixed: I changed </h3> to </h2> > -->
 
-    <form class="card" id="memberForm" method="get" novalidate>
+    <!-- FIxed: I added action so form now posts to process.php -->
+
+    <form class="card" id="memberForm" method="post" action="process.php" novalidate>
 
         <input type="hidden" name="id" value="<?= htmlspecialchars($member['id']) ?>">
 
@@ -90,11 +93,15 @@ $roles   = ['President', 'Secretary', 'Treasurer', 'Member'];
         <div class="field">
             <label for="role">Role</label>
             <select id="role" name="role">
-                <option value="">-- choose a role --</option>
-                <option value="President">President</option>
-                <option value="Secretary">Secretary</option>
-                <option value="Treasurer">Treasurer</option>
-                <option value="Member">Member</option>
+                <option value="">-- choose a role -- </option>
+
+                <!-- $roles is the array defined near the top of the file, $role doesn't exist  -->
+                <?php foreach ($roles as $r): ?>
+                    <option value= "<?= $r ?>"
+                        <?= $member['role'] === $r ? 'selected' : ''?>>
+                        <?= $r ?>
+                    </option>
+                <?php endforeach ?>
             </select>
             <!-- FIX 8: id was a duplicate of the select's id -->
             <span class="error" id="err_role"></span>

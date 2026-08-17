@@ -1,13 +1,13 @@
-Name:
-Class:
-Date:
+Name:Tako Nellyvine Mizero
+Class:Year 2 CS
+Date:13th Aug 2026
 
 TASK 1 - The 10 HTML errors I found in form.php
 (one per line: line number - what was wrong - how I fixed it)
 
-1.
-2.
-3.
+1.Line 61 - The page heading was opened with <h2> but closed with a mismatched </h3> tag - Changed the closing tag to </h2> so it matches the opening tag.
+2.Line 63 - The <form> tag had no action attribute, so it submitted back to form.php instead of process.php, Added action="process.php".
+3.Line 94 - The Role dropdown loop referenced a variable $role that does not exist (the array is $roles), Changed foreach ($role as $r) to foreach ($roles as $r).
 4.
 5.
 6.
@@ -18,4 +18,13 @@ TASK 1 - The 10 HTML errors I found in form.php
 
 
 Anything that did not work, and what you tried:
+
+- The Role dropdown was rendering empty when I first loaded the form. 
+I checked the HTML and found the <select> loop was using $role instead of $roles, 
+once I corrected the variable name the dropdown populated correctly.
+
+- After finishing Task 3a, logging in with admin / admin123 silently reloaded the blank login page with no error message. 
+I temporarily added ini_set('display_errors', 1) and error_reporting(E_ALL) to the top of login.php to see
+if PHP was throwing a hidden warning (this pointed me toward a "headers already sent" issue caused by stray output before the opening <?php tag).
+Once that was resolved I removed the debug lines again before submitting, since display_errors should not be left on.
 

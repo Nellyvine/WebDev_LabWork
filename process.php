@@ -31,6 +31,18 @@ $date_joined = trim($_POST['date_joined'] ?? '');
 
 // TODO 3b-2: if any of the six values above is empty, set a warning flash
 //            and send the user back to form.php.
+// Done
+/*
+ * TASK 3b-2: server-side validation. This is the real security
+ * boundary — client-side JS can be disabled, so nothing here can
+ * be trusted until it's checked again on the server.
+ */
+
+if ($full_name === '' || $email === '' || $phone === '' || $role === '' || $fee_paid === '' || $date_joined === '') {
+    set_flash('Please fill in every field.', 'warn');
+    header('Location: form.php' . ($id !== '' ? '?id=' . (int)$id : ''));
+    exit;
+}
 
 if ($id === '') {
     // TODO 3b-3: INSERT a new member.
@@ -38,11 +50,38 @@ if ($id === '') {
     //            $stmt->bind_param('...', ...);
     //            $stmt->execute();
     //            Then set_flash('Member added.') and redirect to index.php.
+    // Done
+    // TASK 3b-3: id is empty -> this is a brand new member -> INSERT
+
+    $stmt = $conn->prepare(
+        'INSERT INTO members (full_name, email, phone, role, fee_paid, date_joined)
+         VALUES (?, ?, ?, ?, ?, ?)'
+    );
+    $stmt->bind_param('ssssds', $full_name, $email, $phone, $role, $fee_paid, $date_joined);
+    $stmt->execute();
+    set_flash('Member added.');
+    header('Location: index.php');
+    exit;
 } else {
     // TODO 3b-4: UPDATE the member whose id matches. Remember the id is the
     //            LAST ? in the query, so it is the last letter in the type
     //            string and the last value in bind_param.
     //            Then set_flash('Member updated.') and redirect.
+    // Done
+    // TASK 3b-4: id has a value -> this is an existing member -> UPDATE
+
+
+    $id_int = (int)$id;
+    $stmt = $conn->prepare(
+        'UPDATE members
+         SET full_name = ?, email = ?, phone = ?, role = ?, fee_paid = ?, date_joined = ?
+         WHERE id = ?'
+    );
+    $stmt->bind_param('ssssdsi', $full_name, $email, $phone, $role, $fee_paid, $date_joined, $id_int);
+    $stmt->execute();
+    set_flash('Member updated.');
+    header('Location: index.php');
+    exit;
 }
 
 // set_flash('Member added.') is a command used in web programming to store a temporary notification 

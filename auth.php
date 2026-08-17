@@ -6,6 +6,11 @@
 
 // TODO 3a-1: start the session (only if one is not already started).
 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 /**
  * Stop the page and send the visitor to login.php when nobody is signed in.
  */
@@ -13,6 +18,11 @@ function require_login()
 {
     // TODO 3a-2: if $_SESSION['user'] is not set, redirect to login.php
     //            and stop the script with exit;
+
+    if (!isset($_SESSION['user'])){
+        header('location: login.php');
+        exit;
+    }
 }
 
 /**
